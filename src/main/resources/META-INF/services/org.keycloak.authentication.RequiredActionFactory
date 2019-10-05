@@ -1,0 +1,2 @@
+com.spiashko.keycloak.sms.requiredaction.VerifyMobileNumberRequiredActionFactory
+com.spiashko.keycloak.sms.requiredaction.MobileNumberRequiredActionFactory
