@@ -2,28 +2,27 @@ package com.spiashko.keycloak.sms;
 
 public class Constants {
 
-    public static final String COOKIE_SMS_CODE_PROVIDED = "SMS_CODE_PROVIDED";
-
     // User attributes
     public static final String ATTR_MOBILE = "mobile_number";
-    public static final String ATTR_MOBILE_VERIFIED = "mobile_number_verified";
 
     // Answer field names
     public static final String ANSW_SMS_CODE = "sms_code";
     public static final String ANSW_MOBILE_NUMBER = "mobile_number";
-    public static final String ANSW_CHANGE_MOBILE_NUMBER = "change_number";
-    public static final String ANSW_CANCEL_CHANGE_MOBILE_NUMBER = "cancel_change_number";
+    public static final String ANSW_RESEND_SMS_CODE = "resend_sms_code";
+    public static final String ANSW_CANCEL_RESEND_SMS_CODE = "resend_sms_cancel";
 
     // Froms
-    public static final String FORM_MOBILE_NUMBER = "mobile-number.ftl";
-    public static final String FORM_SMS_VALIDATION = "sms-validation.ftl";
+    public static final String FROM_RESEND_SMS = "resend-sms.ftl";
+    public static final String FORM_SMS_VALIDATION = "sms-code.ftl";
 
     // Messages
     public static final String MESSAGE_MOBILE_NUMBER_NO_VALID = "mobile_number.no.valid";
     public static final String MESSAGE_SMS_CODE_NO_VALID = "sms_code.no.valid";
+    public static final String MESSAGE_MOBILE_NUMBER_NOT_EQUAL = "mobile_number.not.equal";
+    public static final String MESSAGE_SMS_TEXT = "sms_text_format";
+    public static final String MESSAGE_SMS_CODE_PROMPT = "sms_code.prompt";
+    public static final String MESSAGE_MOBILE_NUMBER_PROMPT = "mobile_number.prompt";
 
-    // env vars
-    public static final String ENV_VAR_SEND_REAL_SMS = "SEND_REAL_SMS";
-
-    private Constants(){}
+    private Constants() {
+    }
 }

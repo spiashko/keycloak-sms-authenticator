@@ -2,18 +2,12 @@
 
 Contains logic for:
  * sending sms on login and it's verification
- * change mobile number during login with it's verification
+ * support resend functionality by asking linked mobile phone
 
-To install the SMS Authenticator one has to:
+To install the SMS Authenticator:
 
-* Add the jar to the Keycloak server:
-  * `$ cp target/keycloak-sms-authenticator.jar _KEYCLOAK_HOME_/providers/`
-  * `$ cp target/keycloak-sms-authenticator.jar _KEYCLOAK_HOME_/standalone/deployments/`
-
-* Add two templates to the Keycloak server:
-  * `$ cp templates/sms-validation.ftl _KEYCLOAK_HOME_/themes/<theme>/login/`
-  * `$ cp templates/mobile-number.ftl _KEYCLOAK_HOME_/themes/<theme>/login/`
-
+Add the jar with dependencies to the Keycloak server:
+  * `$ cp target/keycloak-sms-authenticator-1.0.0-SNAPSHOT-jar-with-dependencies.jar _KEYCLOAK_HOME_/standalone/deployments/`
 
 Configure your REALM to use the SMS Authentication.
 First create a new REALM (or select a previously created REALM).
@@ -23,16 +17,15 @@ Under Authentication > Flows:
 * Click on 'Actions > Add execution on the 'Browser with SMS Forms' line and add the 'SMS Authentication'
 * Set 'SMS Authentication' to 'REQUIRED'
 
-
 Under Authentication > Bindings:
 * Select 'Browser with SMS' as the 'Browser Flow' for the REALM.
 
-Under Authentication > Required Actions:
-* Click on Register and select `Update Mobile Number` to add the Required Action to the REALM.
-* Click on Register and select `Verify Mobile Number` to add the Required Action to the REALM.
-* Make sure that for the `Update Mobile Number` and the `Verify Mobile Number` the 'Enabled' check box are checked.
+Make sure that all users has `mobile_number` attribute.
 
-TODO:
-* implement Twilio
-* add docker compose 
-* add realm.json for faster setup
+One everything done on login you will be asked for sms code which you can find in logs.
+
+For real world application just replace `LogsSmsProducer` with your implementation.
+
+Development:
+ * use docker compose to start keycloak
+ * put jar inside `./_infrastructure/keycloak/deployments/` to deploy and test functionality

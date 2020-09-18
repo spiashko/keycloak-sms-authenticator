@@ -33,3 +33,7 @@ HELP.md
 
 ### Custom ###
 .directory
+
+_infrastructure/postgre/datadir/**
+_infrastructure/keycloak/deployments/**
+!_infrastructure/keycloak/deployments/.gitkeep

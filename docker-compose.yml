@@ -1,0 +1,38 @@
+version: "3.3"
+
+volumes:
+  postgres_local:
+
+services:
+
+  postgres:
+    image: postgres:11.0-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+      - TZ=UTC
+      - PGTZ=UTC
+    volumes:
+    - ./_infrastructure/postgre/datadir/:/var/lib/postgresql/data
+    - ./_infrastructure/postgre/init/:/docker-entrypoint-initdb.d/
+    ports:
+    - 25432:5432
+
+  keycloak:
+    image: jboss/keycloak:11.0.0
+    environment:
+      KEYCLOAK_USER: 'admin'
+      KEYCLOAK_PASSWORD: 'admin'
+      DB_VENDOR: 'postgres'
+      DB_ADDR: 'postgres'
+      DB_DATABASE: 'keycloak'
+      DB_USER: 'keycloak'
+      DB_PASSWORD: 'password'
+    volumes:
+      - ./_infrastructure/keycloak/deployments/:/opt/jboss/keycloak/standalone/deployments
+    ports:
+      - 8181:8080
+      - 6006:8787
+    command: ["-b", "0.0.0.0", "--debug", "*:8787", "-bmanagement", "0.0.0.0", "-Dkeycloak.profile.feature.upload_scripts=enabled"]
+    depends_on:
+      - postgres
+

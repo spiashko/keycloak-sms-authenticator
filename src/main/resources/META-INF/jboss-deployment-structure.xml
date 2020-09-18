@@ -1,0 +1,7 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="org.apache.commons.lang" />
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

@@ -1,5 +1,6 @@
 package com.spiashko.keycloak.sms.authenticator;
 
+import com.spiashko.keycloak.sms.config.SmsPluginDiContainer;
 import org.jboss.logging.Logger;
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
@@ -13,16 +14,16 @@ import java.util.List;
 
 public class SmsAuthenticatorFactory implements AuthenticatorFactory {
 
-    private static Logger logger = Logger.getLogger(SmsAuthenticatorFactory.class);
-
     public static final String PROVIDER_ID = "sms-code-authenticator";
 
-    private static final SmsAuthenticator SINGLETON = new SmsAuthenticator();
+    private static final Logger logger = Logger.getLogger(SmsAuthenticatorFactory.class);
 
-    private static AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
+    private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
             AuthenticationExecutionModel.Requirement.REQUIRED,
             AuthenticationExecutionModel.Requirement.DISABLED
     };
+
+    private SmsAuthenticator smsAuthenticator;
 
     @Override
     public String getId() {
@@ -33,7 +34,7 @@ public class SmsAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public Authenticator create(KeycloakSession session) {
         logger.debug("create called ...");
-        return SINGLETON;
+        return smsAuthenticator;
     }
 
     @Override
@@ -81,6 +82,8 @@ public class SmsAuthenticatorFactory implements AuthenticatorFactory {
     @Override
     public void init(Config.Scope config) {
         logger.debug("init called ...");
+        smsAuthenticator = SmsPluginDiContainer.getInstance(SmsAuthenticator.class);
+        logger.debug("init finished ...");
     }
 
     @Override
@@ -92,4 +95,5 @@ public class SmsAuthenticatorFactory implements AuthenticatorFactory {
     public void close() {
         logger.debug("close called ...");
     }
+
 }
