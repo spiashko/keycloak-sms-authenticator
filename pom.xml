@@ -16,7 +16,7 @@
         <keycloak.version>11.0.0</keycloak.version>
         <jboss-logging.version>3.4.1.Final</jboss-logging.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <resteasy.version>3.12.1.Final</resteasy.version>
+        <resteasy.version>4.5.7.Final</resteasy.version>
         <guice.version>4.2.1</guice.version>
         <lombok.version>1.18.10</lombok.version>
         <maven.assembly.plugin>2.4.1</maven.assembly.plugin>
